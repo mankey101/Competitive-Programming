@@ -6,32 +6,34 @@ int main(){
 	for(int ip=0;ip<t;ip++){
 		int n,k;
 		cin>>n>>k;
-		set<int> myset;
-		vector<int> a[n];
+		int a[n][k+1];
 		for(int i=0;i<n;i++){
-			int li;
-			cin>>li;
-			for(int j=0;j<li;j++){
+			for(int j=0;j<=k;j++) a[i][j]=0;
+		}
+		for(int j=0;j<n;j++){
+			int n1;
+			cin>>n1;
+			for(int i=0;i<n1;i++){
 				int x;
 				cin>>x;
-				 a[i].push_back(x);
+				a[j][x]=1;
 			}
 		}
 		int count=0;
-		for(int i=0;i<n-1;i++){
-			if(a[i].size()==k){ count=count+n-i-1;
-			continue;}
+		for(int i=0;i<n;i++){
 			for(int j=i+1;j<n;j++){
-				int size1=a[i].size();
-				int size2=a[i].size();
-				if(size1+size2<k) continue;
-				for(vector<int>::iterator it=a[i].begin();it!=a[i].end();it++) myset.insert(*it);
-				for(vector<int>::iterator it=a[j].begin();it!=a[j].end();it++) myset.insert(*it);
-				if(myset.size()==k) count++;
-				myset.clear();
+				int flag=0;
+				for(int y=1;y<=k;y++){
+					if(a[j][y]==0 && a[i][y]==0){ 
+						flag=1;
+						break;
+					}
+				}
+				if(flag==0) count++;
 			}
 		}
-	cout<<count<<endl;
+		cout<<count<<endl;
 	}
+
 }
 		

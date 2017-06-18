@@ -31,7 +31,7 @@ int main(){
 			if(p[i]>max) max=p[i];
 		}
 		ll b=max;
-		ll e=(1e9);
+		ll e=(1e12);
 		while(b<e){
 			ll mid=b + (e-b)/2;
 			if(g(p,mid,m,k)==true) e=mid;
