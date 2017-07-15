@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef map<int,pair< pair<int,int>, char> > vert;
+int main(){
+	int t;
+	cin>>t;
+	for(int ff=0;ff<t;ff++){
+		int n,m;
+		cin>>n>>m;
+		char f[n][m];
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m;j++) cin>>f[i][j];
+		}
+		int k;
+		cin>>k;
+		vert vertex;
+		int t=1;
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m;j++){
+				vertex[t].first.first=i;
+				vertex[t].first.second=j;
+				vertex[t++].second=f[i][j];
+			}
+		}
+		int si,sj;
+		bool flag=1;
+		for(si=0;si<n;si++){
+			for(sj=0;sj<m;sj++) if(f[si][sj]=='M'){flag=0; break;}
+			if(flag==0) break;
+		}
+		int fi,fj;
+		flag=1;
+		for(fi=0;fi<n;fi++){
+			for(fj=0;fj<m;fj++) if(f[fi][fj]=='*'){flag=0; break;}
+			if(flag==0) break;
+		}
+		vector < int > adj[n*m+1];
+		int tt=1;
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<m;j++){
+				if(f[i][j]=='.' || f[i][j]=='*'){
+					cout<<"hi"<<tt<<" "<<i<<" "<<j<<endl;
+					if (i+1<n && (f[i+1][j]=='.' || f[i+1][j]=='*')) adj[tt].push_back(tt+m); 
+					if (i-1>=0 && (f[i-1][j]=='.' || f[i-1][j]=='*'))adj[tt].push_back(tt-m);
+					if(j+1<m && (f[i][j+1]=='.' || f[i][j+1]=='*')) adj[tt].push_back(tt+1) ;
+					if(j-1>=0 && (f[i][j-1]=='.' || f[i][j-1]=='*' )) adj[tt].push_back(tt-1);	
+				}
+				tt++;
+			}
+		}
+		for(int i=1;i<=n*m;i++) {
+			for(vector<int>::iterator j=adj[i].begin();j!=adj[i].end();j++){
+				cout<<*j<<" ";
+			}
+			cout<<endl;
+		}								
+			
+		//cout<<si<<" "<<sj<<" "<<fi<<" "<<fj<<endl;
+			
+	}
+}
+		
+		
